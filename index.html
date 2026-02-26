@@ -65,11 +65,8 @@ transform:translateX(-50%);
 100%{transform:rotate(4deg);}
 }
 
-/* LENTERA COVER FULL WIDTH TIDAK TERPOTONG */
+/* LENTERA NORMAL HEADER */
 .cover-lantern{
-position:absolute;
-top:0;
-left:0;
 width:100%;
 }
 
@@ -79,22 +76,14 @@ height:auto;
 display:block;
 }
 
-/* TALI LENTERA (opsional kalau gambarnya tidak ada tali) */
-.cover-lantern::before{
-content:"";
-position:absolute;
-top:0;
-left:50%;
-width:3px;
-height:60px;
-background:white;
-transform:translateX(-50%);
-}
-
-  .opening{
-position:relative;
+/* OPENING LAYOUT */
+.opening{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 text-align:center;
-padding-top:250px; /* atur sesuai tinggi gambar */
+min-height:100vh;
 }
 
 @keyframes swingCover{
@@ -356,6 +345,7 @@ setInterval(draw,33);
 
 </body>
 </html>
+
 
 
 

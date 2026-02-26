@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
+*{
 margin:0;
 padding:0;
 box-sizing:border-box;
@@ -16,58 +16,40 @@ font-family:'Poppins',sans-serif;
 scroll-behavior:smooth;
 }
 
-body {
-background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+body{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
 overflow-x:hidden;
 }
 
-  /* LENTERA GAMBAR */
-.lantern-wrapper{
+/* PARTICLE CANVAS */
+canvas{
 position:fixed;
 top:0;
 left:0;
+z-index:-1;
+}
+
+/* OPENING */
+.opening{
+position:fixed;
 width:100%;
+height:100vh;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 display:flex;
-justify-content:space-around;
-z-index:1000;
-pointer-events:none;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+z-index:9999;
+padding:20px;
+gap:25px;
 }
 
-.lantern-item{
-position:relative;
-animation:swing 4s ease-in-out infinite;
-}
-
-.lantern-item img{
-width:60px;
-height:auto;
-filter:drop-shadow(0 0 10px rgba(255,215,0,0.8));
-}
-
-/* TALI */
-.lantern-item::before{
-content:"";
-position:absolute;
-top:-40px;
-left:50%;
-width:2px;
-height:40px;
-background:white;
-transform:translateX(-50%);
-}
-
-.lantern-item:nth-child(2){animation-delay:0.5s;}
-
-@keyframes swing{
-0%{transform:rotate(4deg);}
-50%{transform:rotate(-4deg);}
-100%{transform:rotate(4deg);}
-}
-
-/* LENTERA NORMAL HEADER */
+/* LENTERA FULL WIDTH */
 .cover-lantern{
 width:100%;
+pointer-events:none;
 }
 
 .cover-lantern img{
@@ -76,43 +58,15 @@ height:auto;
 display:block;
 }
 
-/* OPENING LAYOUT */
-.opening{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-min-height:100vh;
+/* JUDUL & BUTTON */
+.opening h1{
+font-size:26px;
+font-weight:600;
+z-index:2;
 }
 
-@keyframes swingCover{
-0%{transform:translateX(-50%) rotate(3deg);}
-50%{transform:translateX(-50%) rotate(-3deg);}
-100%{transform:translateX(-50%) rotate(3deg);}
-}
-
-/* OPENING SCREEN */
-.opening {
-position:fixed;
-width:100%;
-height:100vh;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-z-index:9999;
-}
-
-.opening h1 {
-font-size:28px;
-margin-bottom:20px;
-}
-
-.btn-open {
-padding:14px 28px;
+.btn-open{
+padding:14px 30px;
 background:gold;
 border:none;
 border-radius:30px;
@@ -121,13 +75,13 @@ cursor:pointer;
 transition:0.3s;
 }
 
-.btn-open:hover {
-transform:scale(1.1);
+.btn-open:hover{
+transform:scale(1.05);
 background:#ffd700;
 }
 
-/* SECTION STYLE */
-section {
+/* SECTION */
+section{
 min-height:100vh;
 display:flex;
 flex-direction:column;
@@ -140,17 +94,12 @@ transform:translateY(40px);
 transition:all 1s ease;
 }
 
-section.show {
+section.show{
 opacity:1;
 transform:translateY(0);
 }
 
-h2 {
-margin-bottom:20px;
-font-size:28px;
-}
-
-.card {
+.card{
 background:rgba(255,255,255,0.1);
 backdrop-filter:blur(12px);
 padding:30px;
@@ -159,41 +108,27 @@ max-width:600px;
 box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
-.info {
+h2{
+margin-bottom:20px;
+font-size:26px;
+}
+
+.info{
 margin-top:15px;
 line-height:1.8;
 }
 
-.countdown {
+.countdown{
 font-size:28px;
 font-weight:bold;
 margin-top:20px;
 color:gold;
 }
-
-/* PARTICLES */
-canvas {
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-}
 </style>
 </head>
 <body>
 
-<!-- PARTICLE BACKGROUND -->
 <canvas id="canvas"></canvas>
-
-  <!-- LENTERA GAMBAR -->
-<div class="lantern-wrapper">
-  <div class="lantern-item"><img src="lentera.png"></div>
-  <div class="lantern-item"><img src="lentera.png"></div>
-  <div class="lantern-item"><img src="lentera.png"></div>
-  <div class="lantern-item"><img src="lentera.png"></div>
-  <div class="lantern-item"><img src="lentera.png"></div>
-  <div class="lantern-item"><img src="lentera.png"></div>
-</div>
 
 <!-- OPENING -->
 <div class="opening" id="opening">
@@ -232,12 +167,10 @@ Nah, makanya kita bakal ngadain Buka Puasa Bersama Paling Meriah dan kamu wajib 
 📆 <b>Kamis, 5 Maret 2026</b><br>
 ⏰ 16.30 WIB<br>
 📍 Poli PW<br><br>
-
 🤑 Iuran @90 rb<br>
 Transfer ke Ria<br>
 Bank Jateng<br>
 3088034154<br><br>
-
 🎁 bawa bingkisan seharga 20 rb bebas apa saja
 </div>
 </div>
@@ -251,14 +184,13 @@ Bank Jateng<br>
 ✅ Ketawa bareng, biar lupa kalau dompet lagi tipis 💸<br>
 ✅ Ngumpul seru, nostalgia masa lalu 🎭<br>
 ✅ Berburu takjil terbaik, bukan cuma gorengan lima ratusan 🍩<br><br>
-
 Salam perut keroncongan,<br>
 <b>(Panitia Bukber Gadungan)</b>
 </div>
 </div>
 </section>
 
-<!-- COUNTDOWN PALING BAWAH -->
+<!-- COUNTDOWN -->
 <section>
 <div class="card">
 <h2>Menuju Hari H</h2>
@@ -300,7 +232,7 @@ countdownEl.innerHTML=
 days+" Hari "+hours+" Jam "+minutes+" Menit "+seconds+" Detik";
 },1000);
 
-/* PARTICLE EFFECT */
+/* PARTICLES */
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
@@ -345,10 +277,3 @@ setInterval(draw,33);
 
 </body>
 </html>
-
-
-
-
-
-
-

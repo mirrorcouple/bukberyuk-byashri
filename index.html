@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Undangan Bukber</title>
-
 <style>
+/* ===== GLOBAL ===== */
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
-
 body{
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
@@ -19,26 +18,18 @@ body{
     overflow-x:hidden;
     scroll-behavior:smooth;
 }
-
-/* ===== LENTERA ATAS ===== */
-.lentera-atas{
-    width:100%;
-    display:block;
-    object-fit:cover;
+button{
+    padding:8px 15px;
+    border:none;
+    border-radius:30px;
+    background:#ffffff;
+    color:#203a43;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
 }
-
-/* ===== SECTION ===== */
-.section{
-    padding:80px 20px;
-    text-align:center;
-    opacity:0;
-    transform:translateY(40px);
-    transition: all 1s ease;
-}
-
-.section.show{
-    opacity:1;
-    transform:translateY(0);
+button:hover{
+    background:#ddd;
 }
 
 /* ===== OPENING ===== */
@@ -51,25 +42,22 @@ body{
     text-align:center;
     background: linear-gradient(to bottom, #0f2027, #203a43);
 }
-
 #opening img{
     width:250px;
     margin-bottom:30px;
 }
 
-button{
-    padding:12px 25px;
-    border:none;
-    border-radius:30px;
-    background:#ffffff;
-    color:#203a43;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
+/* ===== SECTION ===== */
+.section{
+    padding:80px 20px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(40px);
+    transition: all 1s ease;
 }
-
-button:hover{
-    background:#ddd;
+.section.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* ===== KONTEN ===== */
@@ -79,9 +67,22 @@ button:hover{
     line-height:1.8;
     font-size:18px;
 }
-
 .highlight{
     margin-top:20px;
+}
+.copy-btn{
+    margin-left:10px;
+    padding:4px 10px;
+    font-size:14px;
+}
+
+/* ===== LENTERA ===== */
+.lentera-atas{
+    width:100%;
+    max-height:250px;
+    object-fit:contain;
+    display:block;
+    margin:auto;
 }
 
 /* ===== COUNTDOWN ===== */
@@ -89,15 +90,22 @@ button:hover{
     margin-top:30px;
     font-size:22px;
     font-weight:bold;
+    color: #ffd700;
+    animation: pulse 1s infinite;
+}
+@keyframes pulse{
+    0% {transform: scale(1);}
+    50% {transform: scale(1.05);}
+    100% {transform: scale(1);}
 }
 
-/* ===== TRANSISI ===== */
+/* ===== WAVE TRANSISI ===== */
 .wave{
     height:100px;
     background:linear-gradient(to bottom, transparent, rgba(255,255,255,0.05));
 }
 
-/* ===== RESPONSIVE HP ===== */
+/* ===== RESPONSIVE ===== */
 @media(max-width:768px){
     .section{
         padding:60px 20px;
@@ -105,10 +113,12 @@ button:hover{
     #opening img{
         width:200px;
     }
+    .lentera-atas{
+        max-height:180px;
+    }
 }
 </style>
 </head>
-
 <body>
 
 <!-- AUDIO -->
@@ -124,12 +134,12 @@ button:hover{
 
 <!-- ===== ISI UNDANGAN ===== -->
 <section class="section">
-    <img src="lentera.png" class="lentera-atas">
+    <img src="lentera.png" class="lentera-atas" alt="Lentera">
     <div class="content-box">
         <p>
 Assalamu'alaikum, wahai para pejuang sahur dan pemburu takjil! 🌙✨
 <br><br>
-Ramadhan tanpa buka bersama itu ibarat kolak tanpa santan-kurang nikmat! Nah, makanya kita bakal ngadain Buka Puasa Bersama Paling Meriah dan kamu wajib datang! 🎉🎊
+Ramadhan tanpa buka bersama itu ibarat kolak tanpa santan—kurang nikmat! Nah, makanya kita bakal ngadain Buka Puasa Bersama Paling Meriah dan kamu wajib datang! 🎉🎊
         </p>
 
         <div class="highlight">
@@ -137,11 +147,11 @@ Ramadhan tanpa buka bersama itu ibarat kolak tanpa santan-kurang nikmat! Nah, ma
 ⏰ Waktu: 16.30WIB<br>
 📍 Tempat: Poli PW<br>
 🤑 Iuran @90 rb <br>
-Transfer ke Ria <br>
-Bank Jateng <br>
-3088034154
+Transfer ke Ria <span id="rek" style="font-weight:bold;">3088034154</span> 
+<button class="copy-btn" onclick="copyRek()">Copy</button><br>
+Bank Jateng
 <br><br>
-🎁 bawa bingkisan seharga 20 rb bebas apa saja
+🎁 Bawa bingkisan seharga 20 rb bebas apa saja
         </div>
     </div>
 </section>
@@ -175,6 +185,7 @@ Bank Jateng <br>
 </section>
 
 <script>
+/* ===== BUKA UNDANGAN ===== */
 function bukaUndangan(){
     document.getElementById("opening").style.display="none";
     document.getElementById("musik").play();
@@ -185,6 +196,24 @@ function bukaUndangan(){
         },300*i);
     });
 }
+
+/* ===== COPY REKENING ===== */
+function copyRek(){
+    const rek = document.getElementById("rek").innerText;
+    navigator.clipboard.writeText(rek).then(()=>{
+        alert("Nomor rekening berhasil dicopy! ✅");
+    });
+}
+
+/* ===== SCROLL ANIMASI ===== */
+window.addEventListener('scroll', () => {
+    document.querySelectorAll('.section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100){
+            section.classList.add('show');
+        }
+    });
+});
 
 /* ===== COUNTDOWN ===== */
 var countDownDate = new Date("March 5, 2026 16:30:00").getTime();
@@ -199,12 +228,14 @@ var x = setInterval(function() {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     document.getElementById("countdown").innerHTML =
-    "Menuju Hari H: " + days + " Hari " + hours + " Jam "
-    + minutes + " Menit " + seconds + " Detik ";
+    `<span style="color:#ff6347">${days} Hari</span> 
+     <span style="color:#ffa500">${hours} Jam</span> 
+     <span style="color:#ffd700">${minutes} Menit</span> 
+     <span style="color:#adff2f">${seconds} Detik</span>`;
 
     if (distance < 0) {
         clearInterval(x);
-        document.getElementById("countdown").innerHTML = "Acara Dimulai 🎉";
+        document.getElementById("countdown").innerHTML = "<span style='color:#00ff00'>Acara Dimulai 🎉</span>";
     }
 }, 1000);
 </script>

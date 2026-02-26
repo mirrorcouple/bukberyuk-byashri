@@ -7,258 +7,206 @@
 
 <style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-background:linear-gradient(to bottom,#0f2027,#203a43,#2c5364);
-color:white;
-text-align:center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    color:white;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
 }
 
-/* OPENING */
-#opening{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(to bottom,#0f2027,#203a43,#2c5364);
-z-index:10;
-transition:1s;
-padding:20px;
+/* ===== LENTERA ATAS ===== */
+.lentera-atas{
+    width:100%;
+    display:block;
+    object-fit:cover;
 }
 
-.opening-img{
-width:80%;
-max-width:350px;
-margin-bottom:20px;
-}
-
-.open-btn{
-padding:12px 25px;
-border:none;
-border-radius:30px;
-background:gold;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* CONTENT */
-#content{
-display:none;
-animation:fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-.lentera-top{
-width:100%;
-height:auto;
-display:block;
-}
-
+/* ===== SECTION ===== */
 .section{
-padding:40px 20px;
-line-height:1.8;
+    padding:80px 20px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(40px);
+    transition: all 1s ease;
 }
 
+.section.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ===== OPENING ===== */
+#opening{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background: linear-gradient(to bottom, #0f2027, #203a43);
+}
+
+#opening img{
+    width:250px;
+    margin-bottom:30px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#ffffff;
+    color:#203a43;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ddd;
+}
+
+/* ===== KONTEN ===== */
+.content-box{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.highlight{
+    margin-top:20px;
+}
+
+/* ===== COUNTDOWN ===== */
 #countdown{
-margin-top:20px;
-font-weight:bold;
-font-size:18px;
+    margin-top:30px;
+    font-size:22px;
+    font-weight:bold;
 }
 
-/* REKENING */
-.rekening-box{
-margin-top:10px;
-display:flex;
-justify-content:center;
-align-items:center;
-gap:10px;
-flex-wrap:wrap;
+/* ===== TRANSISI ===== */
+.wave{
+    height:100px;
+    background:linear-gradient(to bottom, transparent, rgba(255,255,255,0.05));
 }
 
-.rekening-box span{
-background:rgba(255,255,255,0.15);
-padding:8px 15px;
-border-radius:10px;
-letter-spacing:2px;
-font-weight:bold;
-}
-
-.copy-btn{
-padding:8px 15px;
-border:none;
-border-radius:8px;
-background:gold;
-cursor:pointer;
-font-weight:bold;
-}
-
-.copy-btn.copied{
-background:#4CAF50;
-color:white;
-}
-
-a, a[href^="tel"], a[href^="mailto"]{
-color:white !important;
-text-decoration:none !important;
+/* ===== RESPONSIVE HP ===== */
+@media(max-width:768px){
+    .section{
+        padding:60px 20px;
+    }
+    #opening img{
+        width:200px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- OPENING -->
-<div id="opening">
-<img src="bukber.png" class="opening-img">
-<h1>Undangan Buka Bersama 🌙</h1>
-<br>
-<button class="open-btn" onclick="openInvite()">Buka Undangan</button>
-</div>
-
-<!-- MUSIK -->
+<!-- AUDIO -->
 <audio id="musik" loop>
 <source src="ramadan.mp3" type="audio/mpeg">
 </audio>
 
-<!-- CONTENT -->
-<div id="content">
+<!-- ===== OPENING ===== -->
+<section id="opening">
+    <img src="bukber.png" alt="Bukber">
+    <button onclick="bukaUndangan()">Buka Undangan</button>
+</section>
 
-<img src="lentera.png" class="lentera-top">
-
-<!-- SECTION 1 - PEMBUKA -->
-<div class="section">
-<p>
+<!-- ===== ISI UNDANGAN ===== -->
+<section class="section">
+    <img src="lentera.png" class="lentera-atas">
+    <div class="content-box">
+        <p>
 Assalamu'alaikum, wahai para pejuang sahur dan pemburu takjil! 🌙✨
-</p>
-
-<br>
-
-<p>
+<br><br>
 Ramadhan tanpa buka bersama itu ibarat kolak tanpa santan-kurang nikmat! Nah, makanya kita bakal ngadain Buka Puasa Bersama Paling Meriah dan kamu wajib datang! 🎉🎊
-</p>
-</div>
+        </p>
 
-<!-- SECTION 2 - DETAIL ACARA -->
-<div class="section">
-
-<p>
-📆 Hari/Tanggal: Kamis, 5 Maret 2026 <br>
-⏰ Waktu: 16.30 WIB <br>
-📍 Tempat: Poli PW
-</p>
-
-<div id="countdown"></div>
-
-<br>
-
-<p>
+        <div class="highlight">
+📆 Hari/Tanggal: Kamis, 5 Maret 2026<br>
+⏰ Waktu: 16.30WIB<br>
+📍 Tempat: Poli PW<br>
 🤑 Iuran @90 rb <br>
 Transfer ke Ria <br>
-Bank Jateng
-</p>
-
-<div class="rekening-box">
-<span id="rekening">3088034154</span>
-<button onclick="copyRek()" id="copyBtn" class="copy-btn">Copy</button>
-</div>
-
-<br>
-
-<p>
+Bank Jateng <br>
+3088034154
+<br><br>
 🎁 bawa bingkisan seharga 20 rb bebas apa saja
-</p>
+        </div>
+    </div>
+</section>
 
-</div>
+<div class="wave"></div>
 
-<!-- SECTION 3 - KENAPA HARUS DATANG -->
-<div class="section">
+<!-- ===== KENAPA HARUS DATANG ===== -->
+<section class="section">
+    <div class="content-box">
+        <h2>Kenapa harus datang?</h2>
+        <br>
+        ✅ Ketawa bareng, biar lupa kalau dompet lagi tipis 💸 <br><br>
+        ✅ Ngumpul seru, nostalgia masa lalu 🎭 <br><br>
+        ✅ Berburu takjil terbaik, bukan cuma gorengan lima ratusan 🍩
+    </div>
+</section>
 
-<p><b>Kenapa harus datang?</b></p>
+<div class="wave"></div>
 
-<br>
-
-<p>
-✅ Ketawa bareng, biar lupa kalau dompet lagi tipis 💸 <br>
-✅ Ngumpul seru, nostalgia masa lalu 🎭 <br>
-✅ Berburu takjil terbaik, bukan cuma gorengan lima ratusan 🍩
-</p>
-
-</div>
-
-<!-- SECTION 4 - PENUTUP -->
-<div class="section">
-
-<p>
-Salam perut keroncongan,<br>
-(Panitia Bukber Gadungan)
-</p>
-
-</div>
-
-</div>
+<!-- ===== PENUTUP + COUNTDOWN ===== -->
+<section class="section">
+    <div class="content-box">
+        <h2>Sampai Jumpa di Hari H ✨</h2>
+        <br>
+        Terimakasih dan ditunggu kehadirannya yaa 🤍 <br><br>
+        Salam perut keroncongan, <br>
+        (Panitia Bukber Gadungan)
+        
+        <div id="countdown"></div>
+    </div>
+</section>
 
 <script>
-function openInvite(){
-document.getElementById("opening").style.opacity="0";
-setTimeout(()=>{
-document.getElementById("opening").style.display="none";
-document.getElementById("content").style.display="block";
-},800);
+function bukaUndangan(){
+    document.getElementById("opening").style.display="none";
+    document.getElementById("musik").play();
 
-document.getElementById("musik").play();
+    document.querySelectorAll(".section").forEach((el,i)=>{
+        setTimeout(()=>{
+            el.classList.add("show");
+        },300*i);
+    });
 }
 
-// COUNTDOWN
-var countDate = new Date("March 5, 2026 16:30:00").getTime();
+/* ===== COUNTDOWN ===== */
+var countDownDate = new Date("March 5, 2026 16:30:00").getTime();
 
 var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
 
-var now = new Date().getTime();
-var distance = countDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("countdown").innerHTML =
+    "Menuju Hari H: " + days + " Hari " + hours + " Jam "
+    + minutes + " Menit " + seconds + " Detik ";
 
-document.getElementById("countdown").innerHTML =
-"⏳ " + days + " Hari " + hours + " Jam "
-+ minutes + " Menit " + seconds + " Detik";
-
-if (distance < 0) {
-clearInterval(x);
-document.getElementById("countdown").innerHTML = "Acara Sedang Berlangsung 🎉";
-}
-
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "Acara Dimulai 🎉";
+    }
 }, 1000);
-
-// COPY
-function copyRek(){
-const text = document.getElementById("rekening").innerText;
-navigator.clipboard.writeText(text);
-
-const btn = document.getElementById("copyBtn");
-btn.classList.add("copied");
-btn.innerText = "✔ Copied";
-
-setTimeout(()=>{
-btn.classList.remove("copied");
-btn.innerText = "Copy";
-},2000);
-}
 </script>
 
 </body>

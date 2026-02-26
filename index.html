@@ -62,19 +62,17 @@ from{opacity:0;}
 to{opacity:1;}
 }
 
-/* LENTERA HEADER */
 .lentera-top{
 width:100%;
 height:auto;
 display:block;
 }
 
-/* ISI */
 .section{
 padding:40px 20px;
+line-height:1.8;
 }
 
-/* COUNTDOWN */
 #countdown{
 margin-top:20px;
 font-weight:bold;
@@ -83,7 +81,7 @@ font-size:18px;
 
 /* REKENING */
 .rekening-box{
-margin-top:15px;
+margin-top:10px;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -113,7 +111,6 @@ background:#4CAF50;
 color:white;
 }
 
-/* Hilangkan link biru */
 a, a[href^="tel"], a[href^="mailto"]{
 color:white !important;
 text-decoration:none !important;
@@ -139,31 +136,37 @@ text-decoration:none !important;
 <!-- CONTENT -->
 <div id="content">
 
-<!-- LENTERA -->
 <img src="lentera.png" class="lentera-top">
 
+<!-- SECTION 1 - PEMBUKA -->
 <div class="section">
-<h2>Assalamu’alaikum ✨</h2>
-<br>
-<p>Dengan penuh kebahagiaan kami mengundang teman-teman untuk hadir di acara</p>
+<p>
+Assalamu'alaikum, wahai para pejuang sahur dan pemburu takjil! 🌙✨
+</p>
 
-<h2 style="margin-top:15px;">🌙 Buka Bersama 🌙</h2>
+<br>
+
+<p>
+Ramadhan tanpa buka bersama itu ibarat kolak tanpa santan-kurang nikmat! Nah, makanya kita bakal ngadain Buka Puasa Bersama Paling Meriah dan kamu wajib datang! 🎉🎊
+</p>
+</div>
+
+<!-- SECTION 2 - DETAIL ACARA -->
+<div class="section">
+
+<p>
+📆 Hari/Tanggal: Kamis, 5 Maret 2026 <br>
+⏰ Waktu: 16.30 WIB <br>
+📍 Tempat: Poli PW
+</p>
 
 <div id="countdown"></div>
 
-<br><br>
+<br>
 
 <p>
-🗓 15 Maret 2026<br>
-⏰ 17.00 WIB - Selesai<br>
-📍 (Isi lokasi di sini)
-</p>
-
-<br><br>
-
-<p>
-🤑 Iuran @90 rb<br>
-Transfer ke Ria<br>
+🤑 Iuran @90 rb <br>
+Transfer ke Ria <br>
 Bank Jateng
 </p>
 
@@ -172,10 +175,37 @@ Bank Jateng
 <button onclick="copyRek()" id="copyBtn" class="copy-btn">Copy</button>
 </div>
 
-<br><br>
-🎁 Bawa bingkisan seharga 20 rb bebas apa saja
-<br><br>
-<p>Wassalamu’alaikum Wr. Wb ✨</p>
+<br>
+
+<p>
+🎁 bawa bingkisan seharga 20 rb bebas apa saja
+</p>
+
+</div>
+
+<!-- SECTION 3 - KENAPA HARUS DATANG -->
+<div class="section">
+
+<p><b>Kenapa harus datang?</b></p>
+
+<br>
+
+<p>
+✅ Ketawa bareng, biar lupa kalau dompet lagi tipis 💸 <br>
+✅ Ngumpul seru, nostalgia masa lalu 🎭 <br>
+✅ Berburu takjil terbaik, bukan cuma gorengan lima ratusan 🍩
+</p>
+
+</div>
+
+<!-- SECTION 4 - PENUTUP -->
+<div class="section">
+
+<p>
+Salam perut keroncongan,<br>
+(Panitia Bukber Gadungan)
+</p>
+
 </div>
 
 </div>
@@ -192,7 +222,7 @@ document.getElementById("musik").play();
 }
 
 // COUNTDOWN
-var countDate = new Date("March 15, 2026 17:00:00").getTime();
+var countDate = new Date("March 5, 2026 16:30:00").getTime();
 
 var x = setInterval(function() {
 
@@ -215,7 +245,7 @@ document.getElementById("countdown").innerHTML = "Acara Sedang Berlangsung 🎉"
 
 }, 1000);
 
-// COPY REKENING
+// COPY
 function copyRek(){
 const text = document.getElementById("rekening").innerText;
 navigator.clipboard.writeText(text);

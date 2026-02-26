@@ -57,19 +57,38 @@ body{
 @keyframes fadeIn{ to {opacity:1;} }
 @keyframes imgFadeIn{ to {opacity:1; transform:translateY(0);} }
 
+/* ===== TOMBOL BUKA UNDANGAN ===== */
+#opening button{
+    padding:15px 30px;
+    border:none;
+    border-radius:50px;
+    background: linear-gradient(135deg, #ffb347, #ffcc33);
+    color:#203a43;
+    font-weight:bold;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+#opening button:hover{
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    background: linear-gradient(135deg, #ffd700, #ffea00);
+}
+
 /* ===== SECTION ===== */
 .section{
     padding:80px 20px;
     text-align:center;
     opacity:0;
-    transform:translateY(40px);
-    transition: all 1s ease;
+    transform:translateY(50px) scale(0.95);
+    transition: all 0.8s ease-out;
     position:relative;
     z-index:1;
 }
 .section.show{
     opacity:1;
-    transform:translateY(0);
+    transform:translateY(0) scale(1);
 }
 
 /* ===== KONTEN ===== */

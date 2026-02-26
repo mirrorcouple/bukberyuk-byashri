@@ -17,39 +17,6 @@ body{
 background:linear-gradient(to bottom,#0f2027,#203a43,#2c5364);
 color:white;
 text-align:center;
-min-height:100vh;
-overflow-x:hidden;
-}
-
-/* LENTERA ATAS */
-.lentera-top{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-max-height:180px;
-object-fit:cover;
-z-index:1;
-pointer-events:none;
-}
-
-#opening,
-#content{
-position:relative;
-z-index:2;
-padding:200px 20px 60px 20px;
-}
-
-/* RESPONSIVE HP */
-@media(max-width:600px){
-.lentera-top{
-max-height:130px;
-}
-
-#opening,
-#content{
-padding:150px 20px 50px 20px;
-}
 }
 
 /* OPENING */
@@ -64,22 +31,24 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 background:linear-gradient(to bottom,#0f2027,#203a43,#2c5364);
+z-index:10;
 transition:1s;
+padding:20px;
+}
+
+.opening-img{
+width:80%;
+max-width:350px;
+margin-bottom:20px;
 }
 
 .open-btn{
-margin-top:20px;
 padding:12px 25px;
 border:none;
 border-radius:30px;
 background:gold;
 font-weight:bold;
 cursor:pointer;
-transition:0.3s;
-}
-
-.open-btn:hover{
-transform:scale(1.1);
 }
 
 /* CONTENT */
@@ -89,8 +58,27 @@ animation:fadeIn 1s ease forwards;
 }
 
 @keyframes fadeIn{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* LENTERA HEADER */
+.lentera-top{
+width:100%;
+height:auto;
+display:block;
+}
+
+/* ISI */
+.section{
+padding:40px 20px;
+}
+
+/* COUNTDOWN */
+#countdown{
+margin-top:20px;
+font-weight:bold;
+font-size:18px;
 }
 
 /* REKENING */
@@ -99,48 +87,33 @@ margin-top:15px;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:12px;
+gap:10px;
 flex-wrap:wrap;
 }
 
 .rekening-box span{
 background:rgba(255,255,255,0.15);
-padding:10px 18px;
-border-radius:12px;
+padding:8px 15px;
+border-radius:10px;
 letter-spacing:2px;
 font-weight:bold;
-font-size:16px;
 }
 
 .copy-btn{
-padding:10px 18px;
+padding:8px 15px;
 border:none;
-border-radius:10px;
+border-radius:8px;
 background:gold;
 cursor:pointer;
 font-weight:bold;
-transition:0.3s ease;
-box-shadow:0 0 10px rgba(255,215,0,0.6);
-}
-
-.copy-btn:hover{
-transform:scale(1.08);
 }
 
 .copy-btn.copied{
 background:#4CAF50;
 color:white;
-box-shadow:0 0 15px #4CAF50;
 }
 
-.notif{
-margin-top:12px;
-font-size:14px;
-color:gold;
-display:none;
-}
-
-/* FIX LINK BIRU */
+/* Hilangkan link biru */
 a, a[href^="tel"], a[href^="mailto"]{
 color:white !important;
 text-decoration:none !important;
@@ -150,12 +123,11 @@ text-decoration:none !important;
 
 <body>
 
-<!-- LENTERA -->
-<img src="lentera.png" class="lentera-top">
-
 <!-- OPENING -->
 <div id="opening">
-<h1>💌 Undangan Buka Bersama 💌</h1>
+<img src="bukber.png" class="opening-img">
+<h1>Undangan Buka Bersama 🌙</h1>
+<br>
 <button class="open-btn" onclick="openInvite()">Buka Undangan</button>
 </div>
 
@@ -166,20 +138,25 @@ text-decoration:none !important;
 
 <!-- CONTENT -->
 <div id="content">
+
+<!-- LENTERA -->
+<img src="lentera.png" class="lentera-top">
+
+<div class="section">
 <h2>Assalamu’alaikum ✨</h2>
 <br>
-<p>
-Dengan penuh kebahagiaan kami mengundang teman-teman untuk hadir di acara
-</p>
+<p>Dengan penuh kebahagiaan kami mengundang teman-teman untuk hadir di acara</p>
 
 <h2 style="margin-top:15px;">🌙 Buka Bersama 🌙</h2>
+
+<div id="countdown"></div>
 
 <br><br>
 
 <p>
-🗓 Tanggal: 15 Maret 2026<br>
-⏰ Waktu: 17.00 WIB - Selesai<br>
-📍 Tempat: (Isi lokasi di sini)
+🗓 15 Maret 2026<br>
+⏰ 17.00 WIB - Selesai<br>
+📍 (Isi lokasi di sini)
 </p>
 
 <br><br>
@@ -195,19 +172,17 @@ Bank Jateng
 <button onclick="copyRek()" id="copyBtn" class="copy-btn">Copy</button>
 </div>
 
-<div id="notif-copy" class="notif">Rekening berhasil disalin ✅</div>
-
 <br><br>
 🎁 Bawa bingkisan seharga 20 rb bebas apa saja
-<br><br><br>
-
+<br><br>
 <p>Wassalamu’alaikum Wr. Wb ✨</p>
+</div>
+
 </div>
 
 <script>
 function openInvite(){
 document.getElementById("opening").style.opacity="0";
-
 setTimeout(()=>{
 document.getElementById("opening").style.display="none";
 document.getElementById("content").style.display="block";
@@ -216,19 +191,40 @@ document.getElementById("content").style.display="block";
 document.getElementById("musik").play();
 }
 
+// COUNTDOWN
+var countDate = new Date("March 15, 2026 17:00:00").getTime();
+
+var x = setInterval(function() {
+
+var now = new Date().getTime();
+var distance = countDate - now;
+
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+document.getElementById("countdown").innerHTML =
+"⏳ " + days + " Hari " + hours + " Jam "
++ minutes + " Menit " + seconds + " Detik";
+
+if (distance < 0) {
+clearInterval(x);
+document.getElementById("countdown").innerHTML = "Acara Sedang Berlangsung 🎉";
+}
+
+}, 1000);
+
+// COPY REKENING
 function copyRek(){
 const text = document.getElementById("rekening").innerText;
 navigator.clipboard.writeText(text);
 
-const notif = document.getElementById("notif-copy");
 const btn = document.getElementById("copyBtn");
-
-notif.style.display = "block";
 btn.classList.add("copied");
 btn.innerText = "✔ Copied";
 
 setTimeout(()=>{
-notif.style.display = "none";
 btn.classList.remove("copied");
 btn.innerText = "Copy";
 },2000);

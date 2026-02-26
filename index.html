@@ -17,19 +17,20 @@ body{
     color:white;
     overflow-x:hidden;
     scroll-behavior:smooth;
+    position:relative;
 }
-button{
-    padding:8px 15px;
-    border:none;
-    border-radius:30px;
-    background:#ffffff;
-    color:#203a43;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
+
+/* ===== BINTANG ===== */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s infinite ease-in-out alternate;
 }
-button:hover{
-    background:#ddd;
+@keyframes twinkle{
+    from {opacity:0.2;}
+    to {opacity:1;}
 }
 
 /* ===== OPENING ===== */
@@ -41,11 +42,20 @@ button:hover{
     align-items:center;
     text-align:center;
     background: linear-gradient(to bottom, #0f2027, #203a43);
+    opacity:0;
+    animation: fadeIn 1.5s forwards;
+    position:relative;
+    z-index:1;
 }
 #opening img{
     width:250px;
     margin-bottom:30px;
+    transform:translateY(-50px);
+    opacity:0;
+    animation: imgFadeIn 1.5s forwards 0.3s;
 }
+@keyframes fadeIn{ to {opacity:1;} }
+@keyframes imgFadeIn{ to {opacity:1; transform:translateY(0);} }
 
 /* ===== SECTION ===== */
 .section{
@@ -54,6 +64,8 @@ button:hover{
     opacity:0;
     transform:translateY(40px);
     transition: all 1s ease;
+    position:relative;
+    z-index:1;
 }
 .section.show{
     opacity:1;
@@ -69,11 +81,24 @@ button:hover{
 }
 .highlight{
     margin-top:20px;
+    background: rgba(255,255,255,0.05);
+    padding:15px 20px;
+    border-radius:15px;
 }
 .copy-btn{
     margin-left:10px;
     padding:4px 10px;
     font-size:14px;
+    border-radius:10px;
+    border:none;
+    background:#ffb347;
+    color:#203a43;
+    cursor:pointer;
+    transition:0.3s, transform 0.2s;
+}
+.copy-btn:hover{
+    background:#ffd700;
+    transform:scale(1.1);
 }
 
 /* ===== LENTERA ===== */
@@ -105,6 +130,28 @@ button:hover{
     background:linear-gradient(to bottom, transparent, rgba(255,255,255,0.05));
 }
 
+/* ===== TOAST COPY ===== */
+#toast{
+    visibility: hidden;
+    min-width: 150px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    opacity:0;
+    transition: opacity 0.5s, transform 0.5s;
+}
+#toast.show{
+    visibility: visible;
+    opacity:1;
+    transform:translateY(0);
+}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
     .section{
@@ -125,6 +172,22 @@ button:hover{
 <audio id="musik" loop>
 <source src="ramadan.mp3" type="audio/mpeg">
 </audio>
+
+<!-- ===== BINTANG ===== -->
+<script>
+const jumlahBintang = 50;
+for(let i=0; i<jumlahBintang; i++){
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random()*3 + 1;
+    star.style.width = size+'px';
+    star.style.height = size+'px';
+    star.style.top = Math.random()*window.innerHeight+'px';
+    star.style.left = Math.random()*window.innerWidth+'px';
+    star.style.animationDuration = (2 + Math.random()*3) + 's';
+    document.body.appendChild(star);
+}
+</script>
 
 <!-- ===== OPENING ===== -->
 <section id="opening">
@@ -184,16 +247,16 @@ Bank Jateng
     </div>
 </section>
 
+<!-- ===== TOAST ===== -->
+<div id="toast">Nomor rekening berhasil dicopy! ✅</div>
+
 <script>
 /* ===== BUKA UNDANGAN ===== */
 function bukaUndangan(){
     document.getElementById("opening").style.display="none";
     document.getElementById("musik").play();
-
     document.querySelectorAll(".section").forEach((el,i)=>{
-        setTimeout(()=>{
-            el.classList.add("show");
-        },300*i);
+        setTimeout(()=>{el.classList.add("show");},300*i);
     });
 }
 
@@ -201,7 +264,9 @@ function bukaUndangan(){
 function copyRek(){
     const rek = document.getElementById("rek").innerText;
     navigator.clipboard.writeText(rek).then(()=>{
-        alert("Nomor rekening berhasil dicopy! ✅");
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(()=>{toast.classList.remove("show")},2000);
     });
 }
 
@@ -217,7 +282,6 @@ window.addEventListener('scroll', () => {
 
 /* ===== COUNTDOWN ===== */
 var countDownDate = new Date("March 5, 2026 16:30:00").getTime();
-
 var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
